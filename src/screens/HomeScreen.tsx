@@ -2,7 +2,6 @@
 import React from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   ScrollView,
   Dimensions,
@@ -20,8 +19,6 @@ const {width: windowWidth} = Dimensions.get('window');
 
 const HomeScreen = () => {
   const {nowPlaying, isLoading, popular, topRated, upcoming} = useMovies();
-
-  console.log('Home screen', nowPlaying);
 
   if (isLoading) {
     return (
