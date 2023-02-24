@@ -5,12 +5,15 @@ import {
   ScrollView,
   Image,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 import React from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParams} from '../navigation/Navigator';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {MovieDetails} from '../components/MovieDetails';
+import {useMovieDetails} from '../hooks/useMovieDetails';
 
 //* Get the height of the screen
 const screenHeight = Dimensions.get('screen').height;
@@ -23,6 +26,9 @@ const DetailScreen = ({route, navigation}: Props) => {
   //* Get image path
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
+  //* Custom hooks to get movie details
+  const {cast, isLoading, movieFull} = useMovieDetails(movie.id);
+
   return (
     <ScrollView>
       {/* Image */}
@@ -31,11 +37,22 @@ const DetailScreen = ({route, navigation}: Props) => {
           <Image source={{uri}} style={styles.posterImage} />
         </View>
       </View>
+
       {/* Text */}
       <View style={styles.marginContainer}>
         <Text style={styles.subTitle}>{movie.original_title}</Text>
         <Text style={styles.title}>{movie.title}</Text>
       </View>
+
+      {/* Movie Details */}
+      <View>
+        {isLoading ? (
+          <ActivityIndicator size={35} color="grey" />
+        ) : (
+          <MovieDetails movieFull={movieFull!} cast={cast} />
+        )}
+      </View>
+
       {/* Close Button */}
       <TouchableOpacity style={styles.backButton}>
         <Icon color="white" name="arrow-back-outline" size={55} />
