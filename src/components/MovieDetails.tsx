@@ -30,7 +30,11 @@ export const MovieDetails = ({movieFull, cast}: Props) => {
         <Text style={styles.overviewStyle}>{overview}</Text>
         <Text style={styles.mainTextStyle}>Presupuesto</Text>
         <Text style={styles.bugdetStyle}>
-          {currencyFormatter.format(budget, {code: 'USD'})}
+          {budget ? (
+            <Text>{currencyFormatter.format(budget, {code: 'USD'})}</Text>
+          ) : (
+            <Text>Budget is not available</Text>
+          )}
         </Text>
       </View>
 

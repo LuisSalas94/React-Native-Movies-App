@@ -13,12 +13,13 @@ import {useMovies} from '../hooks/useMovies';
 //*Carousel
 import Carousel from 'react-native-snap-carousel';
 import {MoviePoster} from '../components/MoviePoster';
+import HorizontalSlider from '../components/HorizontalSlider';
 
 //* Window width
 const {width: windowWidth} = Dimensions.get('window');
 
 const HomeScreen = () => {
-  const {nowPlaying, isLoading} = useMovies();
+  const {nowPlaying, isLoading, popular, topRated, upcoming} = useMovies();
 
   console.log('Home screen', nowPlaying);
 
@@ -44,6 +45,10 @@ const HomeScreen = () => {
           />
         </View>
       </View>
+
+      <HorizontalSlider title="Populares" movies={popular} />
+      <HorizontalSlider title="Top Rated" movies={topRated} />
+      <HorizontalSlider title="Up Coming" movies={upcoming} />
     </ScrollView>
   );
 };
