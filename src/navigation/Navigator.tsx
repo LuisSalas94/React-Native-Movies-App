@@ -2,8 +2,16 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
+import {Movie} from '../interfaces/movieInterface';
 
-const Stack = createStackNavigator();
+//* Use it to navigate between screens
+export type RootStackParams = {
+  HomeScreen: undefined;
+  DetailScreen: Movie;
+};
+
+//* Use RootStackParams to define the type of the navigator
+const Stack = createStackNavigator<RootStackParams>();
 
 export const Navigator = () => {
   return (
